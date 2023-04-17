@@ -14,7 +14,6 @@ done
 
 touch /tmp/buffer
 if [ "$flag_num" == "-n" ]; then
-    echo "hello"
     regex="^[+-]?[0-9]+[.]?[0-9]*([e][+-]?[0-9]+)?$"
     while IFS= read -r line
         do
@@ -32,7 +31,6 @@ cat "$file"
 if [ "$flag_str" == "-s" ]; then
     string="Result:"
     flag=false
-    echo "bye"
     while read -r line
     do
         if [ "$flag" = "true" ]; then
@@ -47,8 +45,6 @@ if [ "$flag_str" == "-s" ]; then
             done
         fi
     done < "$file"
-    echo "buf"
-    cat /tmp/buffer
     cat /tmp/buffer > "$file"
     rm /tmp/buffer
     exit 0
