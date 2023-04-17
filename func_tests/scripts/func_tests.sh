@@ -16,6 +16,10 @@ get_stats()
   echo "############################"
 }
 
+# For logs
+json=../../.report.json
+rm -rf $json
+touch $json
 
 # Define script's behaviour
 flag_rebuild=""

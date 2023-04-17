@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Works when main.exe file is already created in the root folder
-
 print_verbose()
 {
   printf "%s\n" "$1"
@@ -38,16 +36,24 @@ else
   $comparator "$output_data" "$buffer" "$flag_verbose"
   return_code="$?"
 
+  pass=""
   if [ "$return_code" == "0" ]; then
+    pass="OK"
     if [ -n "$flag_verbose" ]; then
       print_verbose "Positive test ${test_num} : PASS"
+      exit 0
     fi
-    exit 0
   else
+    pass="FAIL"
     if [ -n "$flag_verbose" ]; then
       print_verbose "Positive test ${test_num} : FAIL"
+      exit 1
     fi
-    exit 1
+
   fi
+
+  # Collect logs using logger.sh for statistics
+  logger=../../logger.sh
+  $logger "$input_data" "$return_code" "$pass" "pos"
 fi
 
