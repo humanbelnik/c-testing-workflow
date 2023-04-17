@@ -33,8 +33,8 @@ else
   exe_file="../../main.exe"
 
   $exe_file < "$input_data" > "$buffer"
-  $comparator "$output_data" "$buffer" "$flag_verbose"
   return_code="$?"
+  $comparator "$output_data" "$buffer" "$flag_verbose"
 
   pass=""
   if [ "$return_code" == "0" ]; then
