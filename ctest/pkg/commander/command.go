@@ -6,6 +6,18 @@ import (
 	"github.com/alexeyco/simpletable"
 )
 
+const (
+	Reset  = "\033[0m"
+	Red    = "\033[31m"
+	Green  = "\033[32m"
+	Yellow = "\033[33m"
+	Blue   = "\033[34m"
+	Purple = "\033[35m"
+	Cyan   = "\033[36m"
+	Gray   = "\033[37m"
+	White  = "\033[97m"
+)
+
 type TestToken struct {
 	Number string
 	Test_type string
@@ -48,6 +60,12 @@ func (t *Tasks) ShowTasks() {
 	var cells [][]*simpletable.Cell
 
 	for _, item := range tasks {
+
+		if item.Status == "OK" {
+			item.Status = Green + item.Status + Reset
+		} else {
+			item.Status = Red + item.Status + Reset
+		}
 		cells = append(cells, *&[]*simpletable.Cell {
 			{Text: item.Number},
 			{Text: item.Test_type},

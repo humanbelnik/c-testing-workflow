@@ -17,9 +17,10 @@ get_stats()
 }
 
 # For logs
-json=../../.report.json
+json=func_tests/data/.report.json
 rm -rf $json
 touch $json
+echo "[" >> $json
 
 # Define script's behaviour
 flag_rebuild=""
@@ -31,7 +32,6 @@ flag_correct_dir=""
 
 # Check wether we're in a root or in scripts/
 if [ "$(pwd)" != "/*/scripts" ]; then
-  echo "$(pwd)"
   cd ./func_tests/scripts
   flag_correct_dir="false"
 fi
@@ -106,6 +106,11 @@ for input_file in $negs; do
     neg_ok_count=$((neg_ok_count + 1))
   fi
 done
+
+# Edit json
+json="../data/.report.json"
+sed -i "" "$(( $(wc -l < $json))),\$s/,/]/g" $json
+echo $last_line
 
 
 if [ -n "$flag_verbose" ]; then

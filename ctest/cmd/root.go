@@ -13,7 +13,7 @@ var rootCmd = &cobra.Command{
 	Long: ``,
 	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-	  filePath := "../../" + args[0] + "/.report.json"
+	  filePath := "../../" + args[0] + "/func_tests/data/.report.json"
 	  tasks := commander.Tasks{}
 	  err := commander.ReadData(&tasks, filePath)
 	  if err != nil {

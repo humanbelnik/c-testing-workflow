@@ -22,7 +22,7 @@ else
     description=$(echo "$description" | awk '{for(i=4;i<=NF;i++) printf "%s ", $i}')
 fi
 
-json=../../.report.json
+json=../data/.report.json
 json_string=$(
   jq --null-input \
     --arg Number "${number}" \
@@ -33,4 +33,6 @@ json_string=$(
     '$ARGS.named'
 )
 
+
 echo "$json_string" >> $json
+echo "," >> $json
