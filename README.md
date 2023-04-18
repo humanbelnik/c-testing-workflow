@@ -1,11 +1,11 @@
-> The following group of scripts will allow you to comfotably test your C-language projects. 
+> The following group of scripts will allow you to comfortably test your C-language projects. 
 # Workflow
 ## 1. Setup 
 1. Copy this reposiory to your local machine 
     ``` bash
     git clone <repo/link>
     ```
-2. You need to place your project files in `proj` folder. If you have multiple projects - copy `proj` folder as many times as you need, rename them and place your each of your project in each copied folder. At the end, your file structure shold be look like this:
+2. You need to place your project files in `proj` folder. If you have multiple projects - copy `proj` folder as many times as you need, rename them and place each of your project in each copied folder. At the end, your file structure shold look like this:
     ```bash
     c-testing-workflow/
         /ctest
