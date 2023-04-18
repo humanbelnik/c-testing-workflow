@@ -1,0 +1,1 @@
+Input two numbers to sum: Today I wanna Result: 5

@@ -13,13 +13,23 @@ var rootCmd = &cobra.Command{
 	Long: ``,
 	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-	  filePath := "../../" + args[0] + "/func_tests/data/.report.json"
-	  tasks := commander.Tasks{}
-	  err := commander.ReadData(&tasks, filePath)
-	  if err != nil {
-		  fmt.Fprintf(os.Stderr, "[ERR]: %s", err)
-	  } 
-	  tasks.ShowTasks()
+		var err error
+		
+		path, err := os.Getwd()
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "[ERR]: %s", err)
+			os.Exit(1)
+		}
+		fmt.Println(path)
+		
+		filePath := "../" + args[0] + "/func_tests/data/.report.json"
+		tasks := commander.Tasks{}
+		err = commander.ReadData(&tasks, filePath)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "[ERR]: %s", err)
+			os.Exit(1)
+		} 
+		tasks.ShowTasks()
 	},
   }
   

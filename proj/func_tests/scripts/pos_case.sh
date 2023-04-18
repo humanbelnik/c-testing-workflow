@@ -33,8 +33,9 @@ else
   exe_file="../../main.exe"
 
   $exe_file < "$input_data" > "$buffer"
-  return_code="$?"
+  return_code_exe="$?"
   $comparator "$output_data" "$buffer" "$flag_verbose"
+  return_code="$?"
 
   pass=""
   if [ "$return_code" == "0" ]; then
@@ -54,6 +55,6 @@ else
 
   # Collect logs using logger.sh for statistics
   logger=../../logger.sh
-  $logger "$input_data" "$return_code" "$pass" "pos"
+  $logger "$input_data" "$return_code_exe" "$pass" "pos"
 fi
 

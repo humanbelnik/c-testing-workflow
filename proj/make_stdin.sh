@@ -73,6 +73,10 @@ while [ "$flag" != "false" ]; do
     cat "$readme_err" >> "$readme_main"
     cp "$readme_main" ./func_tests
     flag="false"
+
+    # Launch functional testing to update JSON
+    ./func_tests/scripts/func_tests.sh
+
     exit 0
     fi
 

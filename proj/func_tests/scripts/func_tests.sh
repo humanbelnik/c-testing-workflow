@@ -16,6 +16,7 @@ get_stats()
   echo "############################"
 }
 
+printf "\n[LOG]: Functional testing launched...\n"
 # For logs
 json=func_tests/data/.report.json
 rm -rf $json
