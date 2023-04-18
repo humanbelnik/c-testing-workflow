@@ -1,50 +1,59 @@
-# c-testing-workflow
-:closed_lock_with_key: Automating process of testing c-labs
+> The following group of scripts will allow you to comfotably test your C-language projects. 
 # Workflow
-## Setup
-Place this scripts in you workint directory with `*.c` files. Make sure that file organisation is the same as in this repository.
-## Create data for testing with `make_stdin.sh`
-`make_stdin.sh` - main script for data generation
-`trimmer.sh` - subscript for trimming output. 
-Script creates `func_tests/data/` folder with `pos` and `neg` test cases. 
-After it shutted down by `q` it creates `readme.md` file in `func_tests/` directory with test's description.
-##### Launch:
-``` shell
-$ ./make_stdin.sh [ -r | -s | -a ]
+## 1. Setup 
+1. Copy this reposiory to your local machine 
+    ``` bash
+    git clone <repo/link>
+    ```
+2. You need to place your project files in `proj` folder. If you have multiple projects - copy `proj` folder as many times as you need, rename them and place your each of your project in each copied folder. At the end, your file structure shold be look like this:
+    ```bash
+    c-testing-workflow/
+        /ctest
+        /lab_XX_XX_XX
+            main.c
+            func_tests/
+            *.sh
+        /lab_YY_YY_YY
+            main.c
+            func_tests/
+            *.sh
+        ...
+For the following steps we assume that our current directory is `proj` [Or any of you dirs that contains current C project]
+## 2. Generate data with `make_stdin.sh`
+```bash
+$ ./make_stdin.sh [-r|-a|-s]
 ```
-* You can use `|` as a delimiter while inputting your IN data. This symbol will be ignored.
-* `-r` rebuilds your project with `build_release.sh`. Make sure that this script is in your working directory.
-* `-s` trims output from `Result:` substring and further. Use it if your program gives string output. Script trims floating points from output by default.
-* `-a` automates output generation. It will put your program's actual output in `_out.txt` files. Use it in simple cases in order to make your testing workflow faster.
+* `-r` runs `build_release.sh` in order to get the newest project version
+* `-a` generates output automatically by redirecting STDOUT from `*.exe` to the test `*_out.txt` file
+* `-s` trims STDOUT by ignoring all symbols before `Result:` substring
+    * By default script trims the floating point numbers
+---
+#### After shutting down by `q` command you'll have:
+1. All your test data-pairs like `pos_01_in.txt - pos_01_out.txt` in `./func_tests/data/`
+2. `readme.md` file with all your tests descriptions in ./func_tests/
+3. `.report.json` file with statistics for your tests [passed or not] in `./func_tests/data/`
 
-## Test your program on your data with `func_tests.sh`
-`func_tests.sh` - main script that accumulate testing stats by running `pos_case.sh` and `neg_case.sh`
-##### Launch:
-``` shell
-$ ./func_tests.sh [ -v | -r | -s | -n ]
-```
-* `-v` - verbose mode. Gives your info about how many `negatives` and `positives` were passed
-* `-r` - rebuilds your project with `build_release.sh`
-* `-s` - uses `str_comparator.sh`
-* `-n` - usues `num_comparator.sh`
-* By default script uses `comaprartor.sh`
-
-### Comparators
-`num_comparator.sh` - comparing floating-point sequences from two files
-`str_comparator.sh` - comparing symbol sequences after certain substing from two files. By default substring is `Result:`. You can change substring manually through code editing.
-``` shell
-$ ./<script_name> [ -v ]
-```
-* `-v` - verbose mode. Shows your which seuqences from files will be actually compared
-
-### Cleaner
-`sclean.sh` - main script cleaning working directory safely
-`clean.sh` - subscript for actual cleaning
-``` shell
-$ ./sclean.sh
+## 3. Check statistics with `ctest`
+```bash
+$ ctest <proj_folder_name>
 ```
 
-# P.S
-* Scipts are adopted for multifile C projects
-* Make sure that you end your C program's output with `\n`
-* Script's code is a mess, but it works... What else we wnat from bash?
+## 4. Builders
+`build_release.sh`
+`build_debug.sh`
+`build_debug_asan.sh` -- address sanitizer
+`build_debug_msan.sh` -- memory sanitizer
+`build_debug_ubsan.sh` -- undefined behavior sanitizer
+
+```bash
+$ build_*.sh
+```
+## 5. Cleaner
+`sclean.sh` - clean your directory
+```bash
+$ sclean.sh
+```
+## Note:
+1. Multifile C-projects supported
+2. It's not recommended to make data without `make_stdin.sh`. If you do so, you'll need to manually write data to readmes and launching `./func_tests/scripts/func_tests.sh` from `proj` folder`
+3. Scripts are mess. Code is full of garbage from previous fixes. But it works. What else
