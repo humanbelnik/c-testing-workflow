@@ -39,11 +39,12 @@ $ ctest <proj_folder_name>
 ```
 
 ## 4. Builders
-`build_release.sh`
-`build_debug.sh`
-`build_debug_asan.sh` -- address sanitizer
-`build_debug_msan.sh` -- memory sanitizer
-`build_debug_ubsan.sh` -- undefined behavior sanitizer
+* `build_release.sh`
+* `build_debug.sh`
+* `build_debug_asan.sh` -- address sanitizer
+* `build_debug_msan.sh` -- memory sanitizer
+* `build_debug_ubsan.sh` -- undefined behavior sanitizer
+
 
 ```bash
 $ build_*.sh
@@ -56,4 +57,4 @@ $ sclean.sh
 ## Note:
 1. Multifile C-projects supported
 2. It's not recommended to make data without `make_stdin.sh`. If you do so, you'll need to manually write data to readmes and launching `./func_tests/scripts/func_tests.sh` from `proj` folder`
-3. Scripts are mess. Code is full of garbage from previous fixes. But it works. What else
+3. Scripts are mess. Code is full of garbage from previous fixes. But it works. What else we want from bash...? 
