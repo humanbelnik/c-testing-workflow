@@ -57,4 +57,3 @@ $ sclean.sh
 ## Note:
 1. Multifile C-projects supported
 2. It's not recommended to make data without `make_stdin.sh`. If you do so, you'll need to manually write data to readmes and launching `./func_tests/scripts/func_tests.sh` from `proj` folder`
-3. Scripts are mess. Code is full of garbage from previous fixes. But it works. What else we want from bash...? 
